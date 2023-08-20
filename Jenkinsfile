@@ -24,19 +24,6 @@ pipeline {
                 }
             }
         }
-        
-        stage('Create ECR Repository') {
-            steps {
-                script {
-                    def ecrRepoExists = sh(script: "aws ecr describe-repositories --repository-names ${ECR_REPO_NAME} --region ${AWS_REGION}", returnStatus: true)
-
-                    if (ecrRepoExists != 0) {
-                        sh(script: "aws ecr create-repository --repository-name ${ECR_REPO_NAME} --region ${AWS_REGION}", returnStatus: true)
-                    }
-                }
-            }
-        }
-
         stage('Test') {
             steps {
                 echo 'Empty'
